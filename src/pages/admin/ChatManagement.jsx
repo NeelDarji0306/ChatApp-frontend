@@ -22,12 +22,14 @@ const columns = [
     width: 150,
     renderCell: (params) => <AvatarCard avatar={params.row.avatar} />,
   },
+
   {
     field: "name",
     headerName: "Name",
     headerClassName: "table-header",
     width: 300,
   },
+
   {
     field: "groupChat",
     headerName: "Group",
@@ -61,7 +63,7 @@ const columns = [
     headerClassName: "table-header",
     width: 250,
     renderCell: (params) => (
-      <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
+      <Stack direction="row" alignItems="center" spacing={"1rem"}>
         <Avatar alt={params.row.creator.name} src={params.row.creator.avatar} />
         <span>{params.row.creator.name}</span>
       </Stack>
@@ -74,7 +76,6 @@ const ChatManagement = () => {
     `${server}/api/v1/admin/chats`,
     "dashboard-chats"
   );
-  // console.log(data);
 
   useErrors([
     {

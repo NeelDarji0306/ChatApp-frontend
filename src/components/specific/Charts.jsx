@@ -1,16 +1,16 @@
-import React from "react";
-import { Line, Doughnut } from "react-chartjs-2";
 import {
+  ArcElement,
   CategoryScale,
   Chart as ChartJS,
-  Tooltip,
   Filler,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
-  ArcElement,
-  Legend,
+  Tooltip,
 } from "chart.js";
+import React from "react";
+import { Doughnut, Line } from "react-chartjs-2";
 import {
   orange,
   orangeLight,
@@ -20,19 +20,19 @@ import {
 import { getLast7Days } from "../../lib/features";
 
 ChartJS.register(
-  CategoryScale,
   Tooltip,
-  Filler,
+  CategoryScale,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
+  Filler,
   ArcElement,
   Legend
 );
 
 const labels = getLast7Days();
 
-const LineChartOptions = {
+const lineChartOptions = {
   responsive: true,
   plugins: {
     legend: {
@@ -42,6 +42,7 @@ const LineChartOptions = {
       display: false,
     },
   },
+
   scales: {
     x: {
       grid: {
@@ -59,7 +60,7 @@ const LineChartOptions = {
 
 const LineChart = ({ value = [] }) => {
   const data = {
-    labels: labels,
+    labels,
     datasets: [
       {
         data: value,
@@ -71,16 +72,13 @@ const LineChart = ({ value = [] }) => {
     ],
   };
 
-  return <Line data={data} options={LineChartOptions} />;
+  return <Line data={data} options={lineChartOptions} />;
 };
 
-const DoughnutChartOptions = {
+const doughnutChartOptions = {
   responsive: true,
   plugins: {
     legend: {
-      display: false,
-    },
-    title: {
       display: false,
     },
   },
@@ -89,28 +87,24 @@ const DoughnutChartOptions = {
 
 const DoughnutChart = ({ value = [], labels = [] }) => {
   const data = {
-    labels: labels,
+    labels,
     datasets: [
       {
         data: value,
-        fill: true,
         backgroundColor: [purpleLight, orangeLight],
-        borderColor: [purple, orange],
         hoverBackgroundColor: [purple, orange],
+        borderColor: [purple, orange],
         offset: 40,
       },
     ],
   };
-
   return (
     <Doughnut
-      style={{
-        zIndex: 10,
-      }}
+      style={{ zIndex: 10 }}
       data={data}
-      options={DoughnutChartOptions}
+      options={doughnutChartOptions}
     />
   );
 };
 
-export { LineChart, DoughnutChart };
+export { DoughnutChart, LineChart };

@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import {
   AppBar,
   Backdrop,
@@ -14,9 +12,9 @@ import React, { Suspense, lazy, useState } from "react";
 import { orange } from "../../constants/color";
 import {
   Add as AddIcon,
-  Group as GroupIcon,
   Menu as MenuIcon,
   Search as SearchIcon,
+  Group as GroupIcon,
   Logout as LogoutIcon,
   Notifications as NotificationsIcon,
 } from "@mui/icons-material";
@@ -24,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../constants/config";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { userNotExists } from "../../redux/reducers/auth";
 import {
   setIsMobile,
@@ -31,35 +30,36 @@ import {
   setIsNotification,
   setIsSearch,
 } from "../../redux/reducers/misc";
-import { resetNotifications } from "../../redux/reducers/chat";
+import { resetNotificationCount } from "../../redux/reducers/chat";
 
 const SearchDialog = lazy(() => import("../specific/Search"));
-const NotificationsDialog = lazy(() => import("../specific/Notifications"));
+const NotifcationDialog = lazy(() => import("../specific/Notifications"));
 const NewGroupDialog = lazy(() => import("../specific/NewGroup"));
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { isSearch, isNotification, isNewGroup } = useSelector(
     (state) => state.misc
   );
   const { notificationCount } = useSelector((state) => state.chat);
 
-  const handleMobile = () => {
-    // console.log(isMobile);
-    dispatch(setIsMobile(true));
-  };
-  const openSearch = () => {
-    dispatch(setIsSearch(true));
-  };
+  const handleMobile = () => dispatch(setIsMobile(true));
+
+  const openSearch = () => dispatch(setIsSearch(true));
+
   const openNewGroup = () => {
     dispatch(setIsNewGroup(true));
   };
+
   const openNotification = () => {
     dispatch(setIsNotification(true));
-    dispatch(resetNotifications());
+    dispatch(resetNotificationCount());
   };
-  const navgateToGroup = () => navigate("/groups");
+
+  const navigateToGroup = () => navigate("/groups");
+
   const logoutHandler = async () => {
     try {
       const { data } = await axios.get(`${server}/api/v1/user/logout`, {
@@ -68,9 +68,10 @@ const Header = () => {
       dispatch(userNotExists());
       toast.success(data.message);
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something Went Wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }} height={"4rem"}>
@@ -89,6 +90,7 @@ const Header = () => {
             >
               ChatApp
             </Typography>
+
             <Box
               sx={{
                 display: { xs: "block", sm: "none" },
@@ -98,41 +100,39 @@ const Header = () => {
                 <MenuIcon />
               </IconButton>
             </Box>
-
-            <Box sx={{ flexGrow: 1 }} />
+            <Box
+              sx={{
+                flexGrow: 1,
+              }}
+            />
             <Box>
               <IconBtn
-                title="Search"
+                title={"Search"}
                 icon={<SearchIcon />}
                 onClick={openSearch}
               />
-              {/* <Tooltip title="Search">
-                <IconButton
-                  color="inherit"
-                  size="large"
-                  onClick={openSearchDialoge}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </Tooltip> */}
+
               <IconBtn
-                title="New Group"
+                title={"New Group"}
                 icon={<AddIcon />}
                 onClick={openNewGroup}
               />
+
               <IconBtn
-                title="Notifications"
+                title={"Manage Groups"}
+                icon={<GroupIcon />}
+                onClick={navigateToGroup}
+              />
+
+              <IconBtn
+                title={"Notifications"}
                 icon={<NotificationsIcon />}
                 onClick={openNotification}
                 value={notificationCount}
               />
+
               <IconBtn
-                title="Manage Groups"
-                icon={<GroupIcon />}
-                onClick={navgateToGroup}
-              />
-              <IconBtn
-                title="Logout"
+                title={"Logout"}
                 icon={<LogoutIcon />}
                 onClick={logoutHandler}
               />
@@ -146,11 +146,13 @@ const Header = () => {
           <SearchDialog />
         </Suspense>
       )}
+
       {isNotification && (
         <Suspense fallback={<Backdrop open />}>
-          <NotificationsDialog />
+          <NotifcationDialog />
         </Suspense>
       )}
+
       {isNewGroup && (
         <Suspense fallback={<Backdrop open />}>
           <NewGroupDialog />

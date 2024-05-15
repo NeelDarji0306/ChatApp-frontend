@@ -10,51 +10,34 @@ import {
 } from "@mui/material";
 import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAsyncMutaton, useErrors } from "../../hooks/hook";
+import { useAsyncMutation, useErrors } from "../../hooks/hook";
 import {
-  useAcceptFriendRequstMutation,
+  useAcceptFriendRequestMutation,
   useGetNotificationsQuery,
 } from "../../redux/api/api";
 import { setIsNotification } from "../../redux/reducers/misc";
 
 const Notifications = () => {
   const { isNotification } = useSelector((state) => state.misc);
+
   const dispatch = useDispatch();
 
   const { isLoading, data, error, isError } = useGetNotificationsQuery();
 
-  // const [acceptRequest] = useAcceptFriendRequstMutation();
-  const [acceptRequest] = useAsyncMutaton(useAcceptFriendRequstMutation);
+  const [acceptRequest] = useAsyncMutation(useAcceptFriendRequestMutation);
 
   const friendRequestHandler = async ({ _id, accept }) => {
-    // add friend request handler
     dispatch(setIsNotification(false));
-    await acceptRequest("Accepting", { requestId: _id, accept });
-
-    // try {
-    //   const res = await acceptRequest({ requestId: _id, accept });
-
-    //   if (res.data?.success) {
-    //     console.log("Use Socket here");
-    //     toast.success(res.data.success);
-    //   } else {
-    //     toast.error(res.data?.error || "Something Went Wrong");
-    //   }
-    // } catch (error) {
-    //   toast.error("Something Went Wrong");
-    //   console.log(error);
-    // }
+    await acceptRequest("Accepting...", { requestId: _id, accept });
   };
 
-  const closeHandler = () => {
-    dispatch(setIsNotification(false));
-  };
+  const closeHandler = () => dispatch(setIsNotification(false));
 
   useErrors([{ error, isError }]);
 
   return (
     <Dialog open={isNotification} onClose={closeHandler}>
-      <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"s5rem"}>
+      <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
         <DialogTitle>Notifications</DialogTitle>
 
         {isLoading ? (
@@ -62,16 +45,16 @@ const Notifications = () => {
         ) : (
           <>
             {data?.allRequests.length > 0 ? (
-              data?.allRequests?.map((i) => (
+              data?.allRequests?.map(({ sender, _id }) => (
                 <NotificationItem
-                  sender={i.sender}
-                  _id={i._id}
+                  sender={sender}
+                  _id={_id}
                   handler={friendRequestHandler}
-                  key={i._id}
+                  key={_id}
                 />
               ))
             ) : (
-              <Typography textAlign={"center"}>0 Notifications</Typography>
+              <Typography textAlign={"center"}>0 notifications</Typography>
             )}
           </>
         )}
@@ -90,12 +73,12 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
         spacing={"1rem"}
         width={"100%"}
       >
-        {/* <Avatar /> */}
-        <Avatar src={avatar[0]} />
+        <Avatar />
+
         <Typography
           variant="body1"
           sx={{
-            flexGrow: 1,
+            flexGlow: 1,
             display: "-webkit-box",
             WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
@@ -106,6 +89,7 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
         >
           {`${name} sent you a friend request.`}
         </Typography>
+
         <Stack
           direction={{
             xs: "column",
@@ -113,10 +97,7 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
           }}
         >
           <Button onClick={() => handler({ _id, accept: true })}>Accept</Button>
-          <Button
-            color={"error"}
-            onClick={() => handler({ _id, accept: false })}
-          >
+          <Button color="error" onClick={() => handler({ _id, accept: false })}>
             Reject
           </Button>
         </Stack>

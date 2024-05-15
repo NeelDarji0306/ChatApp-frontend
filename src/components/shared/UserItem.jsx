@@ -22,10 +22,11 @@ const UserItem = ({
         {...styling}
       >
         <Avatar src={transformImage(avatar)} />
+
         <Typography
           variant="body1"
           sx={{
-            flexGrow: 1,
+            flexGlow: 1,
             display: "-webkit-box",
             WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
@@ -36,16 +37,17 @@ const UserItem = ({
         >
           {name}
         </Typography>
+
         <IconButton
           size="small"
           sx={{
             bgcolor: isAdded ? "error.main" : "primary.main",
             color: "white",
             "&:hover": {
-              bgcolor: isAdded ? "error.main" : "primary.dark",
+              bgcolor: isAdded ? "error.dark" : "primary.dark",
             },
           }}
-          onClick={() => handler(_id, avatar)}
+          onClick={() => handler(_id)}
           disabled={handlerIsLoading}
         >
           {isAdded ? <RemoveIcon /> : <AddIcon />}

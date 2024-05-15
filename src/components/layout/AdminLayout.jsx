@@ -56,20 +56,19 @@ const adminTabs = [
 ];
 
 const Sidebar = ({ w = "100%" }) => {
+  const location = useLocation();
   const dispatch = useDispatch();
 
-  const location = useLocation();
-
   const logoutHandler = () => {
-    console.log("logout");
     dispatch(adminLogout());
   };
 
   return (
-    <Stack width={w} direction={"column"} p="3rem" spacing={"3rem"}>
+    <Stack width={w} direction={"column"} p={"3rem"} spacing={"3rem"}>
       <Typography variant="h5" textTransform={"uppercase"}>
         ChatApp
       </Typography>
+
       <Stack spacing={"1rem"}>
         {adminTabs.map((tab) => (
           <Link
@@ -85,6 +84,7 @@ const Sidebar = ({ w = "100%" }) => {
           >
             <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
               {tab.icon}
+
               <Typography>{tab.name}</Typography>
             </Stack>
           </Link>
@@ -92,7 +92,8 @@ const Sidebar = ({ w = "100%" }) => {
 
         <Link onClick={logoutHandler}>
           <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
-            {<ExitToAppIcon />}
+            <ExitToAppIcon />
+
             <Typography>Logout</Typography>
           </Stack>
         </Link>
@@ -106,12 +107,9 @@ const AdminLayout = ({ children }) => {
 
   const [isMobile, setIsMobile] = useState(false);
 
-  const handleMobile = () => {
-    setIsMobile(!isMobile);
-  };
-  const handleClose = () => {
-    setIsMobile(false);
-  };
+  const handleMobile = () => setIsMobile(!isMobile);
+
+  const handleClose = () => setIsMobile(false);
 
   if (!isAdmin) return <Navigate to="/admin" />;
 
@@ -129,17 +127,8 @@ const AdminLayout = ({ children }) => {
           {isMobile ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
       </Box>
-      <Grid
-        item
-        md={4}
-        lg={3}
-        sx={{
-          display: {
-            xs: "none",
-            md: "block",
-          },
-        }}
-      >
+
+      <Grid item md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>
         <Sidebar />
       </Grid>
 

@@ -6,13 +6,12 @@ import chatSlice from "./reducers/chat";
 
 const store = configureStore({
   reducer: {
-    // auth: authSlice.reducer,
     [authSlice.name]: authSlice.reducer,
     [miscSlice.name]: miscSlice.reducer,
     [chatSlice.name]: chatSlice.reducer,
     [api.reducerPath]: api.reducer,
   },
-  middleware: (defaultMiddleware) => [...defaultMiddleware(), api.middleware],
+  middleware: (mid) => [...mid(), api.middleware],
 });
 
 export default store;

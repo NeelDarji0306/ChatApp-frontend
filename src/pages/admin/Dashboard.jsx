@@ -31,9 +31,8 @@ const Dashboard = () => {
     `${server}/api/v1/admin/stats`,
     "dashboard-stats"
   );
-  // console.log(data);
 
-  const { stats } = data || [];
+  const { stats } = data || {};
 
   useErrors([
     {
@@ -45,33 +44,26 @@ const Dashboard = () => {
   const Appbar = (
     <Paper
       elevation={3}
-      sx={{
-        padding: "2rem",
-        margin: "2rem 0",
-        borderRadius: "1rem",
-      }}
+      sx={{ padding: "2rem", margin: "2rem 0", borderRadius: "1rem" }}
     >
       <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
-        <AdminPanelSettingsIcon
-          sx={{
-            fontSize: "3rem",
-          }}
-        />
+        <AdminPanelSettingsIcon sx={{ fontSize: "3rem" }} />
 
-        <SearchField />
+        <SearchField placeholder="Search..." />
 
         <CurveButton>Search</CurveButton>
-
         <Box flexGrow={1} />
-
         <Typography
           display={{
             xs: "none",
             lg: "block",
           }}
+          color={"rgba(0,0,0,0.7)"}
+          textAlign={"center"}
         >
           {moment().format("dddd, D MMMM YYYY")}
         </Typography>
+
         <NotificationsIcon />
       </Stack>
     </Paper>
@@ -83,8 +75,8 @@ const Dashboard = () => {
         xs: "column",
         sm: "row",
       }}
-      spacing={"2rem"}
-      justifyContent={"space-between"}
+      spacing="2rem"
+      justifyContent="space-between"
       alignItems={"center"}
       margin={"2rem 0"}
     >
@@ -121,9 +113,7 @@ const Dashboard = () => {
               xs: "center",
               lg: "stretch",
             }}
-            sx={{
-              gap: "2rem",
-            }}
+            sx={{ gap: "2rem" }}
           >
             <Paper
               elevation={3}
@@ -144,19 +134,18 @@ const Dashboard = () => {
             <Paper
               elevation={3}
               sx={{
-                padding: "1rem",
+                padding: "1rem ",
                 borderRadius: "1rem",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 width: { xs: "100%", sm: "50%" },
                 position: "relative",
-                width: "100%",
                 maxWidth: "25rem",
               }}
             >
               <DoughnutChart
-                labels={["Single Chat", "Group Chat"]}
+                labels={["Single Chats", "Group Chats"]}
                 value={[
                   stats?.totalChatsCount - stats?.groupsCount || 0,
                   stats?.groupsCount || 0,
@@ -172,7 +161,7 @@ const Dashboard = () => {
                 width={"100%"}
                 height={"100%"}
               >
-                <GroupIcon /> <Typography>Vs</Typography>
+                <GroupIcon /> <Typography>Vs </Typography>
                 <PersonIcon />
               </Stack>
             </Paper>

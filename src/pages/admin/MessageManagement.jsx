@@ -44,9 +44,10 @@ const columns = [
               </Box>
             );
           })
-        : "No attachments";
+        : "No Attachments";
     },
   },
+
   {
     field: "content",
     headerName: "Content",
@@ -57,9 +58,9 @@ const columns = [
     field: "sender",
     headerName: "Sent By",
     headerClassName: "table-header",
-    width: 150,
+    width: 200,
     renderCell: (params) => (
-      <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
+      <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
         <Avatar alt={params.row.sender.name} src={params.row.sender.avatar} />
         <span>{params.row.sender.name}</span>
       </Stack>
@@ -90,7 +91,6 @@ const MessageManagement = () => {
     `${server}/api/v1/admin/messages`,
     "dashboard-messages"
   );
-  // console.log(data);
 
   useErrors([
     {

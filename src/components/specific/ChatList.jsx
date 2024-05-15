@@ -1,22 +1,27 @@
 import { Stack } from "@mui/material";
 import React from "react";
 import ChatItem from "../shared/ChatItem";
-import { sampleChats } from "../../constants/sampleData";
 
 const ChatList = ({
   w = "100%",
   chats = [],
   chatId,
   onlineUsers = [],
-  newMessagesAlter = [{ chatId: "", count: 0 }],
+  newMessagesAlert = [
+    {
+      chatId: "",
+      count: 0,
+    },
+  ],
   handleDeleteChat,
 }) => {
   return (
     <Stack width={w} direction={"column"} overflow={"auto"} height={"100%"}>
       {chats?.map((data, index) => {
         const { avatar, _id, name, groupChat, members } = data;
-        const newMessageAlert = newMessagesAlter.find(
-          (alert) => alert.chatId === _id
+
+        const newMessageAlert = newMessagesAlert.find(
+          ({ chatId }) => chatId === _id
         );
 
         const isOnline = members?.some((member) =>

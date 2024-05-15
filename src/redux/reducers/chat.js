@@ -19,23 +19,25 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    incrementNotifications: (state) => {
+    incrementNotification: (state) => {
       state.notificationCount += 1;
     },
-    resetNotifications: (state) => {
+    resetNotificationCount: (state) => {
       state.notificationCount = 0;
     },
 
     setNewMessagesAlert: (state, action) => {
+      const chatId = action.payload.chatId;
+
       const index = state.newMessagesAlert.findIndex(
-        (item) => item.chatId === action.payload.chatId
+        (item) => item.chatId === chatId
       );
 
       if (index !== -1) {
         state.newMessagesAlert[index].count += 1;
       } else {
         state.newMessagesAlert.push({
-          chatId: action.payload.chatId,
+          chatId,
           count: 1,
         });
       }
@@ -51,8 +53,8 @@ const chatSlice = createSlice({
 
 export default chatSlice;
 export const {
-  incrementNotifications,
-  resetNotifications,
+  incrementNotification,
+  resetNotificationCount,
   setNewMessagesAlert,
   removeNewMessagesAlert,
 } = chatSlice.actions;

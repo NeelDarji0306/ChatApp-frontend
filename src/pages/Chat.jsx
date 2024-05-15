@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import AppLayout from "../components/layout/AppLayout";
 import { IconButton, Skeleton, Stack } from "@mui/material";
 import { grayColor, orange } from "../constants/color";
@@ -8,7 +14,6 @@ import {
 } from "@mui/icons-material";
 import { InputBox } from "../components/styles/StyledComponents";
 import FileMenu from "../components/dialogs/FileMenu";
-import { sampleMessage } from "../constants/sampleData";
 import MessageComponent from "../components/shared/MessageComponent";
 import { getSocket } from "../socket";
 import {
@@ -49,7 +54,7 @@ const Chat = ({ chatId, user }) => {
 
   const oldMessagesChunk = useGetMessagesQuery({ chatId, page });
 
-  const { data: oldMessages, setData: setOldMessage } = useInfiniteScrollTop(
+  const { data: oldMessages, setData: setOldMessages } = useInfiniteScrollTop(
     containerRef,
     oldMessagesChunk.data?.totalPages,
     page,
@@ -62,7 +67,6 @@ const Chat = ({ chatId, user }) => {
     { isError: oldMessagesChunk.isError, error: oldMessagesChunk.error },
   ];
 
-  // console.log(oldMessages);
   const members = chatDetails?.data?.chat?.members;
 
   const messageOnChange = (e) => {
@@ -91,30 +95,27 @@ const Chat = ({ chatId, user }) => {
 
     if (!message.trim()) return;
 
-    //emitting message to server
+    // Emitting the message to the server
     socket.emit(NEW_MESSAGE, { chatId, members, message });
     setMessage("");
   };
 
   useEffect(() => {
     socket.emit(CHAT_JOINED, { userId: user._id, members });
-
     dispatch(removeNewMessagesAlert(chatId));
 
     return () => {
-      setMessage("");
       setMessages([]);
+      setMessage("");
+      setOldMessages([]);
       setPage(1);
-      setOldMessage([]);
       socket.emit(CHAT_LEAVED, { userId: user._id, members });
     };
   }, [chatId]);
 
   useEffect(() => {
     if (bottomRef.current)
-      bottomRef.current.scrollIntoView({
-        behaviour: "smooth",
-      });
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   useEffect(() => {
@@ -133,6 +134,7 @@ const Chat = ({ chatId, user }) => {
   const startTypingListener = useCallback(
     (data) => {
       if (data.chatId !== chatId) return;
+
       setUserTyping(true);
     },
     [chatId]
@@ -152,7 +154,7 @@ const Chat = ({ chatId, user }) => {
       const messageForAlert = {
         content: data.message,
         sender: {
-          _id: "sdfsdfsfsdfsdfsd",
+          _id: "djasdhajksdhasdsadasdas",
           name: "Admin",
         },
         chat: chatId,
@@ -180,7 +182,7 @@ const Chat = ({ chatId, user }) => {
   return chatDetails.isLoading ? (
     <Skeleton />
   ) : (
-    <>
+    <Fragment>
       <Stack
         ref={containerRef}
         boxSizing={"border-box"}
@@ -201,6 +203,7 @@ const Chat = ({ chatId, user }) => {
 
         <div ref={bottomRef} />
       </Stack>
+
       <form
         style={{
           height: "10%",
@@ -224,11 +227,13 @@ const Chat = ({ chatId, user }) => {
           >
             <AttachFileIcon />
           </IconButton>
+
           <InputBox
             placeholder="Type Message Here..."
             value={message}
             onChange={messageOnChange}
           />
+
           <IconButton
             type="submit"
             sx={{
@@ -248,9 +253,8 @@ const Chat = ({ chatId, user }) => {
       </form>
 
       <FileMenu anchorE1={fileMenuAnchor} chatId={chatId} />
-    </>
+    </Fragment>
   );
 };
 
 export default AppLayout()(Chat);
-// export default Chat

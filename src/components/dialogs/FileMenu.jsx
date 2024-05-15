@@ -13,6 +13,7 @@ import { useSendAttachmentsMutation } from "../../redux/api/api";
 
 const FileMenu = ({ anchorE1, chatId }) => {
   const { isFileMenu } = useSelector((state) => state.misc);
+
   const dispatch = useDispatch();
 
   const imageRef = useRef(null);
@@ -24,10 +25,6 @@ const FileMenu = ({ anchorE1, chatId }) => {
 
   const closeFileMenu = () => dispatch(setIsFileMenu(false));
 
-  const selectRef = (ref) => {
-    ref.current.click();
-  };
-
   const selectImage = () => imageRef.current?.click();
   const selectAudio = () => audioRef.current?.click();
   const selectVideo = () => videoRef.current?.click();
@@ -38,8 +35,8 @@ const FileMenu = ({ anchorE1, chatId }) => {
 
     if (files.length <= 0) return;
 
-    if (files.length > 10)
-      return toast.error(`You can only send 10 ${key} at a time`);
+    if (files.length > 5)
+      return toast.error(`You can only send 5 ${key} at a time`);
 
     dispatch(setUploadingLoader(true));
 
@@ -57,7 +54,7 @@ const FileMenu = ({ anchorE1, chatId }) => {
       if (res.data) toast.success(`${key} sent successfully`, { id: toastId });
       else toast.error(`Failed to send ${key}`, { id: toastId });
 
-      //Fetching here
+      // Fetching Here
     } catch (error) {
       toast.error(error, { id: toastId });
     } finally {
@@ -66,7 +63,7 @@ const FileMenu = ({ anchorE1, chatId }) => {
   };
 
   return (
-    <Menu open={isFileMenu} anchorEl={anchorE1} onClose={closeFileMenu}>
+    <Menu anchorEl={anchorE1} open={isFileMenu} onClose={closeFileMenu}>
       <div
         style={{
           width: "10rem",
@@ -81,7 +78,7 @@ const FileMenu = ({ anchorE1, chatId }) => {
             <input
               type="file"
               multiple
-              accept="image/png,image/jpeg,image/gif"
+              accept="image/png, image/jpeg, image/gif"
               style={{ display: "none" }}
               onChange={(e) => fileChangeHandler(e, "Images")}
               ref={imageRef}
@@ -96,7 +93,7 @@ const FileMenu = ({ anchorE1, chatId }) => {
             <input
               type="file"
               multiple
-              accept="audio/mpeg,audio/wav"
+              accept="audio/mpeg, audio/wav"
               style={{ display: "none" }}
               onChange={(e) => fileChangeHandler(e, "Audios")}
               ref={audioRef}

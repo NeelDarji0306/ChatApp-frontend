@@ -23,6 +23,7 @@ const columns = [
       <Avatar alt={params.row.name} src={params.row.avatar} />
     ),
   },
+
   {
     field: "name",
     headerName: "Name",
@@ -43,18 +44,16 @@ const columns = [
   },
   {
     field: "groups",
-    headerName: "groups",
+    headerName: "Groups",
     headerClassName: "table-header",
     width: 200,
   },
 ];
-
 const UserManagement = () => {
   const { loading, data, error } = useFetchData(
     `${server}/api/v1/admin/users`,
     "dashboard-users"
   );
-  // console.log(data);
 
   useErrors([
     {
@@ -82,7 +81,7 @@ const UserManagement = () => {
       {loading ? (
         <Skeleton height={"100vh"} />
       ) : (
-        <Table heading={"All Users "} columns={columns} rows={rows} />
+        <Table heading={"All Users"} columns={columns} rows={rows} />
       )}
     </AdminLayout>
   );

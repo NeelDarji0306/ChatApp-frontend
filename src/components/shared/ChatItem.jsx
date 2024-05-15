@@ -26,24 +26,23 @@ const ChatItem = ({
       <motion.div
         initial={{ opacity: 0, y: "-100%" }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.1 }}
+        transition={{ delay: 0.1 * index }}
         style={{
           display: "flex",
           gap: "1rem",
-          alignContent: "center",
-          padding: "1rem",
+          alignItems: "center",
           backgroundColor: sameSender ? "black" : "unset",
           color: sameSender ? "white" : "unset",
           position: "relative",
+          padding: "1rem",
         }}
       >
-        {/*Avatar Card*/}
         <AvatarCard avatar={avatar} />
 
-        <Stack justifyContent={"center"}>
+        <Stack>
           <Typography>{name}</Typography>
           {newMessageAlert && (
-            <Typography>{newMessageAlert.count} New Messages</Typography>
+            <Typography>{newMessageAlert.count} New Message</Typography>
           )}
         </Stack>
 
@@ -66,4 +65,4 @@ const ChatItem = ({
   );
 };
 
-export default memo(ChatItem); // if any props of chatItem changes then only rerender will occur here
+export default memo(ChatItem);

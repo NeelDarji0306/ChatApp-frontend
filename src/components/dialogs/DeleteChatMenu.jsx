@@ -7,7 +7,7 @@ import {
   ExitToApp as ExitToAppIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useAsyncMutaton } from "../../hooks/hook";
+import { useAsyncMutation } from "../../hooks/hook";
 import {
   useDeleteChatMutation,
   useLeaveGroupMutation,
@@ -20,11 +20,11 @@ const DeleteChatMenu = ({ dispatch, deleteMenuAnchor }) => {
     (state) => state.misc
   );
 
-  const [deleteChat, _, deleteChatData] = useAsyncMutaton(
+  const [deleteChat, _, deleteChatData] = useAsyncMutation(
     useDeleteChatMutation
   );
 
-  const [leaveGroup, __, leaveGroupData] = useAsyncMutaton(
+  const [leaveGroup, __, leaveGroupData] = useAsyncMutation(
     useLeaveGroupMutation
   );
 
@@ -39,6 +39,7 @@ const DeleteChatMenu = ({ dispatch, deleteMenuAnchor }) => {
     closeHandler();
     leaveGroup("Leaving Group...", selectedDeleteChat.chatId);
   };
+
   const deleteChatHandler = () => {
     closeHandler();
     deleteChat("Deleting Chat...", selectedDeleteChat.chatId);
@@ -75,11 +76,13 @@ const DeleteChatMenu = ({ dispatch, deleteMenuAnchor }) => {
       >
         {isGroup ? (
           <>
-            <ExitToAppIcon /> <Typography>Leave Group</Typography>
+            <ExitToAppIcon />
+            <Typography>Leave Group</Typography>
           </>
         ) : (
           <>
-            <DeleteIcon /> <Typography>Delete Chat</Typography>
+            <DeleteIcon />
+            <Typography>Delete Chat</Typography>
           </>
         )}
       </Stack>

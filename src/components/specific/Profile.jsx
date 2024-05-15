@@ -2,20 +2,15 @@ import React from "react";
 import { Avatar, Stack, Typography } from "@mui/material";
 import {
   Face as FaceIcon,
-  AlternateEmail as UsernameIcon,
+  AlternateEmail as UserNameIcon,
   CalendarMonth as CalendarIcon,
 } from "@mui/icons-material";
 import moment from "moment";
 import { transformImage } from "../../lib/features";
+
 const Profile = ({ user }) => {
   return (
-    <Stack
-      spacing={"2rem"}
-      direction={"column"}
-      alignItems={"center"}
-      // height={"100%"}
-      // // justifyContent={"center"}
-    >
+    <Stack spacing={"2rem"} direction={"column"} alignItems={"center"}>
       <Avatar
         src={transformImage(user?.avatar?.url)}
         sx={{
@@ -30,7 +25,7 @@ const Profile = ({ user }) => {
       <ProfileCard
         heading={"Username"}
         text={user?.username}
-        Icon={<UsernameIcon />}
+        Icon={<UserNameIcon />}
       />
       <ProfileCard heading={"Name"} text={user?.name} Icon={<FaceIcon />} />
       <ProfileCard
@@ -54,10 +49,11 @@ const ProfileCard = ({ text, Icon, heading }) => (
 
     <Stack>
       <Typography variant="body1">{text}</Typography>
-      <Typography color={"gray "} variant="caption">
+      <Typography color={"gray"} variant="caption">
         {heading}
       </Typography>
     </Stack>
   </Stack>
 );
+
 export default Profile;

@@ -5,12 +5,13 @@ import { BouncingSkeleton } from "../styles/StyledComponents";
 const LayoutLoader = () => {
   return (
     <Grid container height={"calc(100vh - 4rem)"} spacing={"1rem"}>
-      {/*4 rem header ni height che*/}
       <Grid
         item
         sm={4}
         md={3}
-        sx={{ display: { xs: "none", sm: "block" } }}
+        sx={{
+          display: { xs: "none", sm: "block" },
+        }}
         height={"100%"}
       >
         <Skeleton variant="rectangular" height={"100vh"} />
@@ -22,6 +23,7 @@ const LayoutLoader = () => {
           ))}
         </Stack>
       </Grid>
+
       <Grid
         item
         md={4}
@@ -81,4 +83,4 @@ const TypingLoader = () => {
   );
 };
 
-export { LayoutLoader, TypingLoader };
+export { TypingLoader, LayoutLoader };

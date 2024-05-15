@@ -2,7 +2,7 @@ import { Avatar, AvatarGroup, Box, Stack } from "@mui/material";
 import React from "react";
 import { transformImage } from "../../lib/features";
 
-//todo transform
+// Todo Transform
 const AvatarCard = ({ avatar = [], max = 4 }) => {
   return (
     <Stack direction={"row"} spacing={0.5}>

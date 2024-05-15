@@ -1,5 +1,11 @@
 import { useInputValidation } from "6pp";
-import { Button, Container, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -7,14 +13,14 @@ import { bgGradient } from "../../constants/color";
 import { adminLogin, getAdmin } from "../../redux/thunks/admin";
 
 const AdminLogin = () => {
-  const dispatch = useDispatch();
   const { isAdmin } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
 
   const secretKey = useInputValidation("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("submitHandler");
     dispatch(adminLogin(secretKey.value));
   };
 
@@ -36,8 +42,8 @@ const AdminLogin = () => {
         sx={{
           height: "100vh",
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Paper
@@ -49,7 +55,7 @@ const AdminLogin = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h5">Login</Typography>
+          <Typography variant="h5">Admin Login</Typography>
           <form
             style={{
               width: "100%",
@@ -60,21 +66,24 @@ const AdminLogin = () => {
             <TextField
               required
               fullWidth
-              type="password"
               label="Secret Key"
+              type="password"
               margin="normal"
               variant="outlined"
               value={secretKey.value}
               onChange={secretKey.changeHandler}
             />
+
             <Button
-              sx={{ marginTop: "1rem" }}
+              sx={{
+                marginTop: "1rem",
+              }}
               variant="contained"
               color="primary"
               type="submit"
               fullWidth
             >
-              Admin Login
+              Login
             </Button>
           </form>
         </Paper>

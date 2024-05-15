@@ -10,7 +10,7 @@ const VisuallyHiddenInput = styled("input")({
   overflow: "hidden",
   padding: 0,
   position: "absolute",
-  whitespace: "nowrap",
+  whiteSpace: "nowrap",
   width: 1,
 });
 
@@ -44,10 +44,11 @@ const SearchField = styled("input")`
 `;
 
 const CurveButton = styled("button")`
+  border-radius: 1.5rem;
   padding: 1rem 2rem;
   border: none;
   outline: none;
-  border-radius: 1.5rem;
+  cursor: pointer;
   background-color: ${matBlack};
   color: white;
   font-size: 1.1rem;
@@ -67,10 +68,10 @@ const BouncingSkeleton = styled(Skeleton)(() => ({
 }));
 
 export {
-  VisuallyHiddenInput,
-  Link,
-  InputBox,
-  SearchField,
   CurveButton,
+  SearchField,
+  InputBox,
+  Link,
+  VisuallyHiddenInput,
   BouncingSkeleton,
 };

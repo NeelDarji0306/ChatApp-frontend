@@ -1,166 +1,17 @@
-// avatar = [],
-// name,
-// _id,
-// groupChat = false,
-// sameSender,
-// isOnline,
-// newMessageAlert,
-// index = 0,
-// handleDeleteChatOpen,
-
-export const sampleChats = [
+export const samepleChats = [
   {
     avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Smith",
+    name: "John Doe",
     _id: "1",
     groupChat: false,
     members: ["1", "2"],
   },
+
   {
     avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
     name: "John Boi",
     _id: "2",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "3",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "4",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "5",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "6",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "7",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "8",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "9",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "10",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "11",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "12",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "13",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "14",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "15",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "16",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "17",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "18",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "19",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "20",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "21",
-    groupChat: false,
-    members: ["1", "2"],
-  },
-  {
-    avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-    name: "John Boi",
-    _id: "22",
-    groupChat: false,
+    groupChat: true,
     members: ["1", "2"],
   },
 ];
@@ -168,7 +19,7 @@ export const sampleChats = [
 export const sampleUsers = [
   {
     avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    name: "John Smith",
+    name: "John Doe",
     _id: "1",
   },
   {
@@ -181,14 +32,14 @@ export const sampleUsers = [
 export const sampleNotifications = [
   {
     sender: {
-      avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
-      name: "John Smith",
+      avatar: "https://www.w3schools.com/howto/img_avatar.png",
+      name: "John Doe",
     },
     _id: "1",
   },
   {
     sender: {
-      avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
+      avatar: "https://www.w3schools.com/howto/img_avatar.png",
       name: "John Boi",
     },
     _id: "2",
@@ -198,56 +49,57 @@ export const sampleNotifications = [
 export const sampleMessage = [
   {
     attachments: [],
-    content: "Bas aise hii",
-    _id: "ajjhashjd",
+    content: "L*uda ka Message hai",
+    _id: "sfnsdjkfsdnfkjsbnd",
     sender: {
       _id: "user._id",
-      name: "Chaman",
+      name: "Chaman ",
     },
     chat: "chatId",
-    createdAt: "2024-03-20T00:00:00.000Z",
+    createdAt: "2024-02-12T10:41:30.630Z",
   },
+
   {
     attachments: [
       {
-        public_id: "asdsad2",
-        url: "http://www.w3schools.com/howto/img_avatar.png",
+        public_id: "asdsad 2",
+        url: "https://www.w3schools.com/howto/img_avatar.png",
       },
     ],
     content: "",
-    _id: "ajjhashjd2",
+    _id: "sfnsdjkfsdnfkdddjsbnd",
     sender: {
-      _id: "eifhsif",
-      name: "Manan",
+      _id: "sdfsdfsdf",
+      name: "Chaman  2",
     },
-    chat: "chatId2",
-    createdAt: "2024-03-20T00:00:00.000Z",
+    chat: "chatId",
+    createdAt: "2024-02-12T10:41:30.630Z",
   },
 ];
 
 export const dashboardData = {
   users: [
     {
+      name: "John Doe",
       avatar: "https://www.w3schools.com/howto/img_avatar.png",
-      name: "John Smith",
       _id: "1",
-      username: "John_smith",
+      username: "john_doe",
       friends: 20,
       groups: 5,
     },
     {
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
       name: "John Boi",
+      avatar: "https://www.w3schools.com/howto/img_avatar.png",
       _id: "2",
-      username: "John_bmith",
-      friends: 30,
-      groups: 15,
+      username: "john_boi",
+      friends: 20,
+      groups: 25,
     },
   ],
 
   chats: [
     {
-      name: "G1 dsjsd",
+      name: "LabadBass Group",
       avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
       _id: "1",
       groupChat: false,
@@ -258,12 +110,12 @@ export const dashboardData = {
       totalMembers: 2,
       totalMessages: 20,
       creator: {
-        name: "John Smith",
+        name: "John Doe",
         avatar: "https://www.w3schools.com/howto/img_avatar.png",
       },
     },
     {
-      name: "Luston Group",
+      name: "L*Da Luston Group",
       avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
       _id: "2",
       groupChat: true,
@@ -279,35 +131,37 @@ export const dashboardData = {
       },
     },
   ],
+
   messages: [
     {
       attachments: [],
-      content: "Hello, world",
-      _id: "fsfsufhsddfshfuisd",
+      content: "L*uda ka Message hai",
+      _id: "sfnsdjkfsdnfkjsbnd",
       sender: {
         avatar: "https://www.w3schools.com/howto/img_avatar.png",
-        name: "Chaman",
+        name: "Chaman ",
       },
       chat: "chatId",
       groupChat: false,
-      createdAt: "2024-03-20T00:00:00.000Z",
+      createdAt: "2024-02-12T10:41:30.630Z",
     },
+
     {
       attachments: [
         {
-          public_id: "sdfsdf dv",
+          public_id: "asdsad 2",
           url: "https://www.w3schools.com/howto/img_avatar.png",
         },
       ],
       content: "",
-      _id: "fsfsufhsddfshfuisd 2",
+      _id: "sfnsdjkfsdnfkdddjsbnd",
       sender: {
         avatar: "https://www.w3schools.com/howto/img_avatar.png",
-        name: "Chaman c",
+        name: "Chaman  2",
       },
       chat: "chatId",
       groupChat: true,
-      createdAt: "2024-03-20T00:00:00.000Z",
+      createdAt: "2024-02-12T10:41:30.630Z",
     },
   ],
 };

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const useErrors = (errors = []) => {
@@ -7,41 +6,38 @@ const useErrors = (errors = []) => {
     errors.forEach(({ isError, error, fallback }) => {
       if (isError) {
         if (fallback) fallback();
-        else toast.error(error?.data?.message || "Something Went Wrong");
+        else toast.error(error?.data?.message || "Something went wrong");
       }
     });
-
-    return () => {};
   }, [errors]);
 };
 
-const useAsyncMutaton = (mutationHook) => {
+const useAsyncMutation = (mutatationHook) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
 
-  const [mutate] = mutationHook();
+  const [mutate] = mutatationHook();
 
   const executeMutation = async (toastMessage, ...args) => {
     setIsLoading(true);
-    const toastId = toast.loading(toastMessage || "Updationg data...");
+    const toastId = toast.loading(toastMessage || "Updating data...");
 
     try {
       const res = await mutate(...args);
+
       if (res.data) {
         toast.success(res.data.message || "Updated data successfully", {
           id: toastId,
         });
         setData(res.data);
       } else {
-        toast.error(res?.error?.data?.message || "Something Went Wrong", {
+        toast.error(res?.error?.data?.message || "Something went wrong", {
           id: toastId,
         });
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong", {
-        id: toastId,
-      });
+      toast.error("Something went wrong", { id: toastId });
     } finally {
       setIsLoading(false);
     }
@@ -64,4 +60,4 @@ const useSocketEvents = (socket, handlers) => {
   }, [socket, handlers]);
 };
 
-export { useErrors, useAsyncMutaton, useSocketEvents };
+export { useErrors, useAsyncMutation, useSocketEvents };
